@@ -7,7 +7,6 @@ const responseHandler = require('./responses.js');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const urlStruct = {
-    //Base -> Index incase of fail
     '/': htmlHandler.getIndex,
     '/style.css':htmlHandler.getCSS,
     '/success': responseHandler.success,

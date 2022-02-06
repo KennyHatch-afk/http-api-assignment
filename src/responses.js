@@ -1,25 +1,26 @@
 const respond = (request, response, content, type, status) => {
-    response.writeHead(status, { 'Content-Type': type });
-    response.write(content);
-    response.end();
+  response.writeHead(status, { 'Content-Type': type });
+  response.write(content);
+  response.end();
+  return;
 };
 
 const success = (request, response, acceptedTypes) => {
-    const responseObj = {
-      message: 'This is a successful response'
-    };
+  const responseObj = {
+    message: 'This is a successful response'
+  };
   
-    if (acceptedTypes[0] === 'text/xml') {
-      let responseXML = '<response>';
-      responseXML = `${responseXML} <message>This is a successful response</message>`;
-      responseXML = `${responseXML} </response>`;
+  if (acceptedTypes[0] === 'text/xml') {
+    let responseXML = '<response>';
+    responseXML = `${responseXML} <message>This is a successful response</message>`;
+    responseXML = `${responseXML} </response>`;
 
-      return respond(request, response, responseXML, 'text/xml', 200);
-    }
+    return respond(request, response, responseXML, 'text/xml', 200);
+  }
 
-    const responseText = JSON.stringify(responseObj);
+  const responseText = JSON.stringify(responseObj);
 
-    respond(request, response, responseText, 'application/json', 200);
+  return respond(request, response, responseText, 'application/json', 200);
 };
 
 const badRequest = (request, response, acceptedTypes, params) => {
@@ -54,7 +55,7 @@ const badRequest = (request, response, acceptedTypes, params) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 200);
+  return respond(request, response, responseText, 'application/json', 200);
 };
 
 const unauthorized = (request, response, acceptedTypes, params) => {
@@ -89,7 +90,7 @@ const unauthorized = (request, response, acceptedTypes, params) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 200);
+  return respond(request, response, responseText, 'application/json', 200);
 };
 
 const forbidden = (request, response, acceptedTypes) => {
@@ -109,7 +110,7 @@ const forbidden = (request, response, acceptedTypes) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 403);
+  return respond(request, response, responseText, 'application/json', 403);
 };
 
 const internal = (request, response, acceptedTypes) => {
@@ -129,7 +130,7 @@ const internal = (request, response, acceptedTypes) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 500);
+  return respond(request, response, responseText, 'application/json', 500);
 };
 
 const notImplemented = (request, response, acceptedTypes) => {
@@ -149,7 +150,7 @@ const notImplemented = (request, response, acceptedTypes) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 501);
+  return respond(request, response, responseText, 'application/json', 501);
 };
 
 const notFound = (request, response, acceptedTypes) => {
@@ -169,7 +170,7 @@ const notFound = (request, response, acceptedTypes) => {
 
   const responseText = JSON.stringify(responseObj);
 
-  respond(request, response, responseText, 'application/json', 404);
+  return respond(request, response, responseText, 'application/json', 404);
 };
 
 module.exports = {
